@@ -48,4 +48,23 @@ public class SearchCriteriaTest {
         Person test = new Person();
         SearchCriteria.printPersons(network, test);
     }
+
+    @Test
+    public void anonymousTest(){
+        SearchCriteria.printPersons(network, new Person(){
+            @Override
+            public boolean test(Person p) {
+                if(p.getAge() > 25 && p.getGender() == Sex.MALE)
+                    return true;
+                else
+                    return false;
+            }
+        });
+    }
+
+    @Test
+    public void lambdaTest(){
+        CheckPerson test = p -> p.getAge() > 25;
+        SearchCriteria.printPersons(network, test);
+    }
 }
